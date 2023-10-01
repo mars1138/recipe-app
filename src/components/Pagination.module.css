@@ -1,0 +1,14 @@
+.pagination {
+  display: flex;
+}
+
+/* .pagination svg {
+  height: 1.6rem;
+  width: 1.6rem;
+  fill: currentColor;
+  margin: 0 0.2rem;
+}
+
+.pagination span {
+  margin: 0 0.4rem;
+} */

@@ -1,69 +1,94 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,700');
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  --color-primary: #f38e82;
+  --color-grad-1: #fbdb89;
+  --color-grad-2: #f48982;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  --color-grey-light-1: #f9f5f3; /* Light background */
+  --color-grey-light-2: #f2efee; /* Light lines */
+  --color-grey-light-3: #d3c7c3; /* Light text (placeholder) */
+  --color-grey-dark-1: rgb(97, 85, 81); /* Normal text */
+  --color-grey-dark-2: rgb(145, 133, 129); /* Lighter text */
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+  --shadow-card: 0 2px 8px rgba(97, 85, 81, 0.2);
+  --shadow-modal: 0 2px 8px rgba(0, 0, 0, 0.15);
+  --shadow-button: 0 2px 8px rgba(0, 0, 0, 0.15);
+  --shadow-search: 0 0.7rem 3rem rgba(97, 85, 81, 0.08);
+
+  --borderRadius-button: 10rem;
+  --borderRadius-img: 2px;
+  --borderRadius-card: 4px;
+  --borderRadius-card-img: 3px;
+  --borderRadius-modal: 5px;
+  --borderRadius-input: 3px;
+  --borderRadius-search: 10rem;
+
+  --bp-large: 78.15em; /* 1250px */
+  --bp-medium: 61.25em; /* 980px */
+  --bp-small: 37.5em; /* 600px */
+  --bp-smallest: 31.25em; /* 500px */
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+* {
+  margin: 0;
+  padding: 0;
 }
-a:hover {
-  color: #535bf2;
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+
+  @media only screen and (max-width: var(--bp-medium)) {
+    font-size: 50%;
+  }
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-grey-dark-1);
+  background-image: linear-gradient(
+    to right bottom,
+    var(--color-grad-1),
+    var(--color-grad-2)
+  );
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: calc(100vh - 2 * 4vw);
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.container {
+  position: relative;
+  max-width: 120rem;
+  min-height: 117rem;
+  margin: 4vw auto;
+  background-color: #fff;
+  border-radius: 9px;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+
+  display: grid;
+  grid-template-rows: 10rem minmax(100rem, auto);
+  grid-template-columns: 1fr 2fr;
+  grid-template-areas:
+    'head head'
+    'list recipe';
+
+  @media only screen and (max-width: var(--bp-large)) {
+    max-width: 100%;
+    margin: 0;
+    border-radius: 0;
+  }
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.main {
+  display: 
 }

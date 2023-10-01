@@ -1,0 +1,92 @@
+.btn {
+  background-image: linear-gradient(
+    to right bottom,
+    var(--color-grad-1),
+    var(--color-grad-2)
+  );
+  border-radius: var(--borderRadius-button);
+  border: none;
+  text-transform: uppercase;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s;
+  padding: 1.5rem 4rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.btn:hover {
+  transform: scale(1.05);
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.btn > *:first-child {
+  margin-right: 1rem;
+}
+
+.btn-nav {
+  height: 100%;
+  font-family: inherit;
+  color: inherit;
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background-image: none;
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
+  padding: 0 1.5rem;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+}
+
+.btn-nav:hover {
+  transform: none;
+}
+
+.btn-nav svg {
+  height: 2.4rem;
+  width: 2.4rem;
+  fill: var(--color-primary);
+  margin-right: 0.7rem;
+  transform: translateY(5px);
+}
+
+.btn-pagination {
+  color: var(--color-primary);
+  font-size: 1.3rem;
+  font-weight: 600;
+  border: none;
+  background-color: var(--color-grey-light-1);
+  padding: 0.8rem 1.2rem;
+  border-radius: var(--borderRadius-button);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s;
+}
+
+.btn-pagination:first-of-type {
+  margin-left: 2rem;
+  margin-right: auto;
+}
+.btn-pagination:last-of-type {
+  margin-left: auto;
+  margin-right: 2rem;
+}
+
+.btn-pagination svg {
+  height: 1.6rem;
+  width: 1.6rem;
+  fill: currentColor;
+  margin: 0 0.2rem;
+}
+
+.btn-pagination span {
+  margin: 0 0.4rem;
+}
