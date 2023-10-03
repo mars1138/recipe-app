@@ -12,7 +12,7 @@
   --color-grey-dark-2: rgb(145, 133, 129); /* Lighter text */
 
   --shadow-card: 0 2px 8px rgba(97, 85, 81, 0.2);
-  --shadow-modal: 0 2px 8px rgba(0, 0, 0, 0.15);
+  --shadow-modal: 0 2px 8px rgba(0, 0, 0, 0.25);
   --shadow-button: 0 2px 8px rgba(0, 0, 0, 0.15);
   --shadow-search: 0 0.7rem 3rem rgba(97, 85, 81, 0.08);
 
@@ -90,5 +90,5 @@ body {
 }
 
 .main {
-  display: 
+  display: ;
 }

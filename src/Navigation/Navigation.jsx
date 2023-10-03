@@ -6,7 +6,7 @@ const Navigation = (props) => {
     <nav className={classes.nav}>
       <ul className={classes['nav-list']}>
         <li>
-          <Button navButton>
+          <Button navButton onClick={props.addRecipe}>
             <svg>
               <use href="src/assets/icons.svg#icon-edit"></use>
             </svg>

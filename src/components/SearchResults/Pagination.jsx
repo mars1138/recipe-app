@@ -1,4 +1,4 @@
-import Button from '../UI-elements/Button';
+import Button from '../../UI-elements/Button';
 import classes from './Pagination.module.css';
 
 const Pagination = (props) => {

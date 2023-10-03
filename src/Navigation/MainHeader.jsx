@@ -2,7 +2,7 @@ import Button from '../UI-elements/Button';
 import Navigation from './Navigation';
 import classes from './MainHeader.module.css';
 
-const MainHeader = () => {
+const MainHeader = (props) => {
   return (
     <header className={classes.header}>
       <img src="src/assets/logo.png" alt="Logo" className={classes.logo} />
@@ -14,7 +14,7 @@ const MainHeader = () => {
         />
         <Button type="submit">Search</Button>
       </form>
-      <Navigation />
+      <Navigation addRecipe={props.addRecipe} />
     </header>
   );
 };
