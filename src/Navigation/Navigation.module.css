@@ -1,5 +1,7 @@
 .nav {
   margin-left: auto;
+  margin-right: 2.5rem;
+  height: 100%;
 }
 
 .nav-list {
@@ -9,4 +11,31 @@
 }
 
 .nav-list li {
+  height: 100%;
+}
+
+.bookmarks {
+  padding: 1rem 0;
+  position: absolute;
+  right: -2.5rem;
+  z-index: 10;
+  width: 40rem;
+  background-color: #fff;
+  box-shadow: 0 0.8rem 5rem 2rem rgba(var(--color-grey-dark-1), 0.1);
+
+  /* visibility: hidden;
+  opacity: 0; */
+  transition: all 0.5s 0.2s;
+  animation: bookmark-fade 0.2s ease-in;
+}
+
+@keyframes bookmark-fade {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+  }
+  100% {
+    visibility: visible;
+    opacity: 1;
+  }
 }

@@ -20,7 +20,7 @@ const Copy = () => {
 
 const SearchResults = () => {
   return (
-    <div>
+    <div className={classes.search}> 
       <ResultsList />
       <Pagination />
       <Copy />
