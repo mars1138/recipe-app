@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+import { motion } from 'framer-motion';
 
 import Backdrop from '../UI-elements/Backdrop';
 import Button from '../UI-elements/Button';
@@ -14,7 +15,13 @@ const AddRecipe = (props) => {
   return (
     <Fragment>
       <Backdrop onClick={props.onClose} />
-      <div className={classes['add-recipe']}>
+      <motion.div
+        className={classes['add-recipe']}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.3, type: 'tween'}}
+      >
         <h1>Add Recipe</h1>
         <Button modalClose onClick={props.onClose}>
           &times;
@@ -104,7 +111,7 @@ const AddRecipe = (props) => {
             </Button>
           </div>
         </form>
-      </div>
+      </motion.div>
     </Fragment>
   );
 };

@@ -1,4 +1,5 @@
 import { useState, Fragment } from 'react';
+import { AnimatePresence } from 'framer-motion';
 
 import MainHeader from './Navigation/MainHeader';
 import SearchResults from './components/SearchResults/SearchResults';
@@ -31,7 +32,9 @@ function App() {
     <main className="container">
       <MainHeader addRecipe={showAddHandler} />
       <MainBody />
-      {addRecipe && <AddRecipe onClose={hideAddHandler} />}
+      <AnimatePresence>
+        {addRecipe && <AddRecipe onClose={hideAddHandler} />}
+      </AnimatePresence>
     </main>
   );
 }

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 import Button from '../UI-elements/Button';
 import classes from './Navigation.module.css';
@@ -13,7 +14,12 @@ const Navigation = (props) => {
 
   if (!props.data) {
     dropDown = (
-      <div className={classes.bookmarks}>
+      <motion.div
+        className={classes.bookmarks}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      >
         <ul className="bookmarks__list">
           <div className="message">
             <div>
@@ -24,7 +30,7 @@ const Navigation = (props) => {
             <p>No bookmarks yet. Find a nice recipe and bookmark it :)</p>
           </div>
         </ul>
-      </div>
+      </motion.div>
     );
   } else {
     dropDown = '';
@@ -52,7 +58,7 @@ const Navigation = (props) => {
             </svg>
             <span>Bookmarks</span>
           </Button>
-          {hover && dropDown}
+          <AnimatePresence>{hover && dropDown}</AnimatePresence>
         </li>
       </ul>
     </nav>

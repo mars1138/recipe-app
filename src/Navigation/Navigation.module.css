@@ -25,11 +25,11 @@
 
   /* visibility: hidden;
   opacity: 0; */
-  transition: all 0.5s 0.2s;
-  animation: bookmark-fade 0.2s ease-in;
+  /* transition: all 0.5s 0.2s;
+  animation: bookmark-fade 0.2s ease-in; */
 }
 
-@keyframes bookmark-fade {
+/* @keyframes bookmark-fade {
   0% {
     visibility: hidden;
     opacity: 0;
@@ -38,4 +38,4 @@
     visibility: visible;
     opacity: 1;
   }
-}
+} */
