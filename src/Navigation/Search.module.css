@@ -1,0 +1,29 @@
+.search {
+  background-color: #ffffff;
+  border-radius: var(--borderRadius-search);
+  display: flex;
+  align-items: center;
+  padding-left: 3rem;
+  transition: all 0.3s;
+}
+
+.search:focus-within {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-search);
+}
+
+.field {
+  border: none;
+  background: none;
+  font-family: inherit;
+  color: inherit;
+  font-size: 1.7rem;
+  width: 30rem;
+}
+
+.field:focus {
+  outline: none;
+}
+
+.field::placeholder {
+}

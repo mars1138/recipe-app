@@ -5,7 +5,7 @@ import MainHeader from './Navigation/MainHeader';
 import SearchResults from './components/SearchResults/SearchResults';
 import Recipe from './components/Recipe/Recipe';
 import AddRecipe from './components/AddRecipe';
-import Modal from './UI-elements/Modal';
+import SiteProvider from './components/store/SiteProvider';
 
 function App() {
   const [addRecipe, setAddRecipe] = useState(false);
@@ -29,13 +29,17 @@ function App() {
   };
 
   return (
-    <main className="container">
-      <MainHeader addRecipe={showAddHandler} />
-      <MainBody />
-      <AnimatePresence>
-        {addRecipe && <AddRecipe onClose={hideAddHandler} />}
-      </AnimatePresence>
-    </main>
+    <SiteProvider>
+      <div className="container">
+        <MainHeader addRecipe={showAddHandler} />
+        <main className="main">
+          <MainBody />
+          <AnimatePresence>
+            {addRecipe && <AddRecipe onClose={hideAddHandler} />}
+          </AnimatePresence>
+        </main>
+      </div>
+    </SiteProvider>
   );
 }
 

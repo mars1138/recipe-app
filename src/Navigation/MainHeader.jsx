@@ -6,14 +6,14 @@ const MainHeader = (props) => {
   return (
     <header className={classes.header}>
       <img src="src/assets/logo.png" alt="Logo" className={classes.logo} />
-      <form className={classes.search}>
+      {/* <form className={classes.search}>
         <input
           className={classes.field}
           type="text"
           placeholder="Search over 1,000,000 recipes..."
         />
         <Button type="submit">Search</Button>
-      </form>
+      </form> */}
       <Navigation addRecipe={props.addRecipe} />
     </header>
   );

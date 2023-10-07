@@ -22,20 +22,29 @@
   width: 40rem;
   background-color: #fff;
   box-shadow: 0 0.8rem 5rem 2rem rgba(var(--color-grey-dark-1), 0.1);
-
-  /* visibility: hidden;
-  opacity: 0; */
-  /* transition: all 0.5s 0.2s;
-  animation: bookmark-fade 0.2s ease-in; */
 }
 
-/* @keyframes bookmark-fade {
-  0% {
-    visibility: hidden;
-    opacity: 0;
-  }
-  100% {
-    visibility: visible;
-    opacity: 1;
-  }
-} */
+.bookmarks-list {
+  list-style: none;
+}
+
+.message {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 5rem 4rem;
+
+  display: flex;
+}
+.message svg {
+  height: 3rem;
+  width: 3rem;
+  fill: $color-primary;
+  transform: translateY(-0.3rem);
+}
+
+.message p {
+  margin-left: 1.5rem;
+  font-size: 1.8rem;
+  line-height: 1.5;
+  font-weight: 600;
+}

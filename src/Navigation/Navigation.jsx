@@ -20,8 +20,8 @@ const Navigation = (props) => {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
       >
-        <ul className="bookmarks__list">
-          <div className="message">
+        <ul className={classes['bookmarks-list']}>
+          <div className={classes.message}>
             <div>
               <svg>
                 <use href="src/assets/icons.svg#icon-smile"></use>
