@@ -1,4 +1,5 @@
-import Button from '../UI-elements/Button';
+// import Button from '../UI-elements/Button';
+import Search from './Search';
 import Navigation from './Navigation';
 import classes from './MainHeader.module.css';
 
@@ -14,6 +15,7 @@ const MainHeader = (props) => {
         />
         <Button type="submit">Search</Button>
       </form> */}
+      <Search searchRecipe={props.searchRecipe} />
       <Navigation addRecipe={props.addRecipe} />
     </header>
   );

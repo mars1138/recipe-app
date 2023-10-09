@@ -3,9 +3,9 @@ import classes from './Recipe.module.css';
 const Figure = (props) => {
   return (
     <figure className={classes.fig}>
-      <img src="src/assets/test-1.jpg" alt="Tomato" />
-      <h1 className="rassetspe__title">
-        <span>Pasta with tomato cream sauce</span>
+      <img src={props.imgUrl} alt={props.title} />
+      <h1>
+        <span>{props.title}</span>
       </h1>
     </figure>
   );

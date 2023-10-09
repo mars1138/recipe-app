@@ -6,15 +6,11 @@ const Directions = (props) => {
     <div className={classes.directions}>
       <h2>How to cook it</h2>
       <p className={classes.text}>
-        This recipe was carefully designed and tested by
-        <span className={classes.publisher}>The Pioneer Woman</span>. Please
+        This recipe was carefully designed and tested by&nbsp;
+        <span className={classes.publisher}>{props.publisher}</span>. Please
         check out directions at their website.
       </p>
-      <a
-        className={classes.link}
-        href="http://thepioneerwoman.com/cooking/pasta-with-tomato-cream-sauce/"
-        target="_blank"
-      >
+      <a className={classes.link} href={props.link} target="_blank">
         <Button small>
           <span>Directions</span>
           <svg className={classes.icon}>

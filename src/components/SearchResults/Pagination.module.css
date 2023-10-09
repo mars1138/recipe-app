@@ -1,5 +1,6 @@
 .pagination {
   display: flex;
+  margin: auto auto 5rem auto;
 }
 
 /* .pagination svg {

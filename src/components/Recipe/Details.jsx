@@ -1,21 +1,41 @@
+import { useContext, useEffect, useState } from 'react';
+
 import Button from '../../UI-elements/Button';
+import SiteContext from '../store/site-context';
 import classes from './Recipe.module.css';
 
 const Details = (props) => {
+  const [isSaved, setIsSaved] = useState();
+  const siteCtx = useContext(SiteContext);
+
+  useEffect(() => {
+    const saved = siteCtx.bookmarks.findIndex(
+      (item) => item.id === props.recipeId
+    );
+
+    setIsSaved(saved < 0 ? false : true);
+  });
+
+  const clickHandler = () => {
+    // if (isSaved) siteCtx.removeBookmark(props.recipeId);
+    // if (!isSaved) siteCtx.addBookmark(props.recipeId);
+    siteCtx.toggleBookmark(props.recipeId);
+  };
+
   return (
     <div className={classes.details}>
       <div className={classes.info}>
         <svg>
           <use href="src/assets/icons.svg#icon-clock"></use>
         </svg>
-        <span className={classes.data}>45</span>
+        <span className={classes.data}>{props.cookTime}</span>
         <span className={classes.text}>minutes</span>
       </div>
       <div className={classes.info}>
         <svg>
           <use href="src/assets/icons.svg#icon-users"></use>
         </svg>
-        <span className={classes.data}>4</span>
+        <span className={classes.data}>{props.servings}</span>
         <span className={classes.text}>servings</span>
 
         <div className={classes.buttons}>
@@ -37,9 +57,11 @@ const Details = (props) => {
           <use href="src/assets/icons.svg#icon-user"></use>
         </svg>
       </div>
-      <Button round>
+      <Button round onClick={clickHandler}>
         <svg className="">
-          <use href="src/assets/icons.svg#icon-bookmark-fill"></use>
+          <use
+            href={`src/assets/icons.svg#icon-bookmark${isSaved ? '-fill' : ''}`}
+          ></use>
         </svg>
       </Button>
     </div>

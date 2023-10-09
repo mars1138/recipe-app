@@ -14,7 +14,7 @@
 }
 
 .preview a:active {
-  background-color: $color-grey-light-1;
+  background-color: var(--color-grey-light-1);
 }
 
 .preview figure {
@@ -78,4 +78,8 @@
   height: 1.2rem;
   width: 1.2rem;
   fill: var(--color-primary);
+}
+
+.selected {
+  background-color: var(--color-grey-light-1);
 }

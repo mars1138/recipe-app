@@ -2,10 +2,13 @@ import React from 'react';
 
 const SiteContext = React.createContext({
   currentRecipe: {},
-  foundRecipes: [],
+  query: '',
+  queryResults: [],
   bookmarks: [],
-  addBookmark: (id) => {},
-  removeBookmark: (id) => {},
+  page: 1,
+  storeQueryResults: (results) => {},
+  setCurrentRecipe: (id) => {},
+  toggleBookmark: (id) => {},
   clearBookmarks: () => {},
 });
 

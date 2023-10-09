@@ -1,7 +1,6 @@
 .nav {
-  margin-left: auto;
   margin-right: 2.5rem;
-  height: 100%;
+  align-self: stretch;
 }
 
 .nav-list {
@@ -38,7 +37,7 @@
 .message svg {
   height: 3rem;
   width: 3rem;
-  fill: $color-primary;
+  fill: var(--color-primary);
   transform: translateY(-0.3rem);
 }
 
@@ -47,4 +46,7 @@
   font-size: 1.8rem;
   line-height: 1.5;
   font-weight: 600;
+}
+.message span {
+  color: var(--color-primary);
 }

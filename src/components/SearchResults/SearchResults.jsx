@@ -18,9 +18,9 @@ const Copy = () => {
   );
 };
 
-const SearchResults = () => {
+const SearchResults = (props) => {
   return (
-    <div className={classes.search}> 
+    <div className={classes.search}>
       <ResultsList />
       <Pagination />
       <Copy />

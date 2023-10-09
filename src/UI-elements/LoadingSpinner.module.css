@@ -1,11 +1,11 @@
 .spinner {
-  margin: 5rem auto;
+  margin: 20% auto 5rem auto;
   text-align: center;
 }
 
 .spinner svg {
-  height: 6rem;
-  width: 6rem;
+  height: 10rem;
+  width: 10rem;
   fill: var(--color-primary);
   animation: rotate 2s infinite linear;
 }
