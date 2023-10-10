@@ -55,59 +55,26 @@ const testBookmarks = [
     publisher: 'Closet Cooking',
     title: 'Peppermint Candy Cane Popcorn',
   },
-  //   {
-  //     id: '5ed6604591c37cdc054bce52',
-  //     image_url:
-  //       'http://forkify-api.herokuapp.com/images/candysushitk410x27375b4.jpg',
-  //     publisher: 'All Recipes',
-  //     title: 'Candied Yams',
-  //   },
+  {
+    id: '5ed6604591c37cdc054bce52',
+    image_url:
+      'http://forkify-api.herokuapp.com/images/candysushitk410x27375b4.jpg',
+    publisher: 'All Recipes',
+    title: 'Candied Yams',
+  },
 ];
 
 const defaultSiteState = {
-  currentRecipe: { ...testCurrentRecipe },
+  currentRecipe: null,
   query: '',
-  queryResults: [...testQueryResults],
+  queryResults: [],
   bookmarks: [...testBookmarks],
   page: 1,
 };
 
 const siteReducer = (state, action) => {
-  if (action.type === 'TOGGLE') {
-    let updatedBookmarks;
-
-    const existingIndex = state.bookmarks.findIndex(
-      (item) => item.id === action.id
-    );
-    console.log(existingIndex);
-
-    if (existingIndex >= 0) {
-      updatedBookmarks = state.bookmarks.filter(
-        (item) => item.id !== action.id
-      );
-      console.log('updatedBookmarks: ', updatedBookmarks);
-    } else {
-      const newItem = {
-        id: state.currentRecipe.id,
-        image_url: state.currentRecipe.image_url,
-        publisher: state.currentRecipe.publisher,
-        title: state.currentRecipe.title,
-      };
-      updatedBookmarks = [...state.bookmarks.concat(newItem)]; // return new array, do not manipulate existing state.
-      console.log('updatedBookmarks: ', updatedBookmarks);
-    }
-
-    return {
-      currentRecipe: state.currentRecipe,
-      query: state.query,
-      queryResults: state.queryResults,
-      bookmarks: updatedBookmarks,
-      page: state.page,
-    };
-  }
-
   if (action.type === 'QUERY') {
-    console.log(action.results);
+    // console.log(action.results);
 
     const updatedResults = [...action.results];
 
@@ -132,33 +99,86 @@ const siteReducer = (state, action) => {
     };
   }
 
-  //   if (action.type === 'TOGGLE') {
-  //     let updatedBookmarks;
-  //     const existingitem = state.bookmarks.find((item) => item.id === action.id);
+  if (action.type === 'TOGGLE') {
+    let updatedBookmarks;
 
-  //     if (existingItem) {
-  //       updatedBookmarks = state.bookmarks.filter(
-  //         (item) => item.id !== action.id
-  //       );
-  //     } else {
-  //       //
-  //     }
+    const existingIndex = state.bookmarks.findIndex(
+      (item) => item.id === action.id
+    );
+    // console.log(existingIndex);
 
-  //     return {
-  //       currentRecipe: state.currentRecipe,
-  //       query: state.query,
-  //       queryResults: state.queryResults,
-  //       bookmarks: updatedBookmarks,
-  //       page: state.page,
-  //     };
-  //   }
+    if (existingIndex >= 0) {
+      updatedBookmarks = state.bookmarks.filter(
+        (item) => item.id !== action.id
+      );
+      //   console.log('updatedBookmarks: ', updatedBookmarks);
+    } else {
+      const newItem = {
+        id: state.currentRecipe.id,
+        image_url: state.currentRecipe.image_url,
+        publisher: state.currentRecipe.publisher,
+        title: state.currentRecipe.title,
+      };
+      updatedBookmarks = [...state.bookmarks.concat(newItem)]; // return new array, do not manipulate existing state.
+      //   console.log('updatedBookmarks: ', updatedBookmarks);
+    }
 
-  if (action.type === 'CLEAR') {
+    localStorage.setItem('forkify-bookmarks', JSON.stringify(updatedBookmarks));
+
     return {
       currentRecipe: state.currentRecipe,
-      query: action.query,
-      queryResults: updatedResults,
+      query: state.query,
+      queryResults: state.queryResults,
+      bookmarks: updatedBookmarks,
+      page: state.page,
+    };
+  }
+
+  if (action.type === 'BOOKMARKS') {
+    console.log('action.bk: ', action.bookmarks);
+    const updatedBookmarks = action.bookmarks;
+    // action.bookmarks.forEach((bk) => {
+    //   updatedBookmarks.push(bk);
+    // });
+    console.log(updatedBookmarks);
+    return {
+      currentRecipe: state.currentRecipe,
+      query: state.query,
+      queryResults: state.queryResults,
+      bookmarks: updatedBookmarks,
+      page: state.page,
+    };
+  }
+
+  if (action.type === 'SERVINGS') {
+    const updatedRecipe = { ...state.currentRecipe };
+
+    updatedRecipe.servings = action.servings;
+
+    updatedRecipe.ingredients.forEach((ing) => {
+      ing.quantity =
+        (ing.quantity * action.servings) / state.currentRecipe.servings;
+    });
+
+    console.log(updatedRecipe);
+
+    return {
+      currentRecipe: updatedRecipe,
+      query: state.query,
+      queryResults: state.queryResults,
       bookmarks: state.bookmarks,
+      page: state.page,
+    };
+  }
+
+  if (action.type === 'CLEAR') {
+    localStorage.clear('forkify-bookmarks');
+
+    return {
+      currentRecipe: state.currentRecipe,
+      query: state.query,
+      queryResults: state.queryResults,
+      bookmarks: [],
       page: state.page,
     };
   }
@@ -192,6 +212,20 @@ const SiteProvider = (props) => {
     });
   };
 
+  const bookmarksHandler = (bookmarks) => {
+    dispatchSiteAction({
+      type: 'BOOKMARKS',
+      bookmarks: bookmarks,
+    });
+  };
+
+  const servingsHandler = (servings) => {
+    dispatchSiteAction({
+      type: 'SERVINGS',
+      servings: servings,
+    });
+  };
+
   const clearHandler = () => {
     dispatchSiteAction({ type: 'CLEAR' });
   };
@@ -205,6 +239,8 @@ const SiteProvider = (props) => {
     storeQueryResults: queryHandler,
     setCurrentRecipe: currentHandler,
     toggleBookmark: toggleHandler,
+    setBookmarks: bookmarksHandler,
+    updateServings: servingsHandler,
     clearBookmarks: clearHandler,
   };
 

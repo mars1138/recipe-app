@@ -7,7 +7,9 @@ const Preview = (props) => {
   const siteCtx = useContext(SiteContext);
 
   const previewClasses = `${classes.preview} ${
-    siteCtx.currentRecipe.id === props.item.id ? classes.selected : ''
+    siteCtx.currentRecipe && siteCtx.currentRecipe.id === props.item.id
+      ? classes.selected
+      : ''
   }`;
 
   const bookmarked = siteCtx.bookmarks.findIndex(
@@ -52,7 +54,7 @@ const Preview = (props) => {
 
   const clickHandler = async () => {
     // don't need to make API call if already currentRecipe
-    if (siteCtx.currentRecipe.id !== props.item.id) {
+    if (!siteCtx.currentRecipe || siteCtx.currentRecipe.id !== props.item.id) {
       const recipe = await getRecipeDetails(
         `${import.meta.env.VITE_API_URL}${props.item.id}`
       );

@@ -25,6 +25,7 @@
 
 .bookmarks-list {
   list-style: none;
+  box-shadow: var(--shadow-card);
 }
 
 .message {

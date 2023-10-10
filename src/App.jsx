@@ -1,4 +1,4 @@
-import { useState, Fragment, useContext } from 'react';
+import { useState, Fragment, useContext, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
 
 import MainHeader from './Navigation/MainHeader';
@@ -6,11 +6,14 @@ import SearchResults from './components/SearchResults/SearchResults';
 import Recipe from './components/Recipe/Recipe';
 import AddRecipe from './components/AddRecipe';
 import SiteContext from './components/store/site-context';
+// import { downloadBookmarks } from '../util/bookmarks';
+
 // import SiteProvider from './components/store/SiteProvider';
 
 function App() {
   const [addRecipe, setAddRecipe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [bookmarks, setBookmarks] = useState();
   const siteCtx = useContext(SiteContext);
 
   const getRecipes = async (query, url) => {
@@ -64,6 +67,15 @@ function App() {
       }`
     );
   };
+
+  useEffect(() => {
+    const bookmarks = JSON.parse(localStorage.getItem('forkify-bookmarks'));
+    // const bookmarks = downloadBookmarks();
+    console.log('bookmarks: ', bookmarks);
+    if (bookmarks && bookmarks.length > 0) siteCtx.setBookmarks(bookmarks);
+  }, []);
+
+  // if (bookmarks[0]) siteCtx.setBookmarks(bookmarks);
 
   const MainBody = (props) => {
     return (

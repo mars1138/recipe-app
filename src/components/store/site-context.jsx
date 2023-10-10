@@ -9,6 +9,8 @@ const SiteContext = React.createContext({
   storeQueryResults: (results) => {},
   setCurrentRecipe: (id) => {},
   toggleBookmark: (id) => {},
+  setBookmarks: (bookmarks) => {},
+  updateServings: (servings) => {},
   clearBookmarks: () => {},
 });
 

@@ -16,9 +16,10 @@ const Details = (props) => {
     setIsSaved(saved < 0 ? false : true);
   });
 
-  const clickHandler = () => {
-    // if (isSaved) siteCtx.removeBookmark(props.recipeId);
-    // if (!isSaved) siteCtx.addBookmark(props.recipeId);
+  const servingsHandler = (newServings) => {
+    siteCtx.updateServings(newServings);
+  };
+  const bookmarkHandler = () => {
     siteCtx.toggleBookmark(props.recipeId);
   };
 
@@ -39,12 +40,22 @@ const Details = (props) => {
         <span className={classes.text}>servings</span>
 
         <div className={classes.buttons}>
-          <Button tiny>
+          <Button
+            tiny
+            onClick={() => {
+              servingsHandler(props.servings - 1);
+            }}
+          >
             <svg>
               <use href="src/assets/icons.svg#icon-minus-circle"></use>
             </svg>
           </Button>
-          <Button tiny>
+          <Button
+            tiny
+            onClick={() => {
+              servingsHandler(props.servings + 1);
+            }}
+          >
             <svg>
               <use href="src/assets/icons.svg#icon-plus-circle"></use>
             </svg>
@@ -57,7 +68,7 @@ const Details = (props) => {
           <use href="src/assets/icons.svg#icon-user"></use>
         </svg>
       </div>
-      <Button round onClick={clickHandler}>
+      <Button round onClick={bookmarkHandler}>
         <svg className="">
           <use
             href={`src/assets/icons.svg#icon-bookmark${isSaved ? '-fill' : ''}`}
