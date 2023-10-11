@@ -88,7 +88,7 @@ const siteReducer = (state, action) => {
   }
 
   if (action.type === 'CURRENT') {
-    const updatedCurrent = action.id;
+    const updatedCurrent = action.newCurrent;
 
     return {
       currentRecipe: updatedCurrent,
@@ -198,10 +198,10 @@ const SiteProvider = (props) => {
     });
   };
 
-  const currentHandler = (id) => {
+  const currentHandler = (newCurrent) => {
     dispatchSiteAction({
       type: 'CURRENT',
-      id: id,
+      newCurrent: newCurrent,
     });
   };
 

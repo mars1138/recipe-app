@@ -22,6 +22,7 @@ const Bookmarks = (props) => {
           onClick={() => {
             siteCtx.clearBookmarks();
             props.onClear();
+            window.location.replace('/');
           }}
         >
           Clear

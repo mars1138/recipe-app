@@ -17,22 +17,22 @@ function App() {
   const siteCtx = useContext(SiteContext);
 
   const getRecipes = async (query, url) => {
-    // const timeout = (s) => {
-    //   return new Promise((_, reject) => {
-    //     setTimeout(() => {
-    //       reject(
-    //         new Error(`Request took too long!  Timeout after ${s} seconds.`)
-    //       );
-    //     }, s * 1000);
-    //   });
-    // };
+    const timeout = (s) => {
+      return new Promise((_, reject) => {
+        setTimeout(() => {
+          reject(
+            new Error(`Request took too long!  Timeout after ${s} seconds.`)
+          );
+        }, s * 1000);
+      });
+    };
 
     try {
-      const res = await fetch(url);
-      // const res = await Promise.race(
-      //   fetch(url),
-      //   timeout(`${import.meta.env.VITE_TIMEOUT_SEC}`)
-      // );
+      // const res = await fetch(url);
+      const res = await Promise.race([
+        fetch(url),
+        timeout(`${import.meta.env.VITE_TIMEOUT_SEC}`),
+      ]);
       console.log(res);
       const data = await res.json();
       console.log(data.data.recipes);

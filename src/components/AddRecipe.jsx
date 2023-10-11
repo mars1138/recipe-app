@@ -1,15 +1,114 @@
-import { Fragment } from 'react';
+import { Fragment, useState, useContext } from 'react';
 import { motion } from 'framer-motion';
 
 import Backdrop from '../UI-elements/Backdrop';
 import Button from '../UI-elements/Button';
-
+import LoadingSpinner from '../UI-elements/LoadingSpinner';
+import SiteContext from '../components/store/site-context';
 import classes from './AddRecipe.module.css';
 
 const AddRecipe = (props) => {
-  const submitHandler = (e) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const siteCtx = useContext(SiteContext);
+
+  const timeout = function (s) {
+    return new Promise(function (_, reject) {
+      setTimeout(function () {
+        reject(new Error(`Request took too long! Timeout after ${s} second`));
+      }, s * 1000);
+    });
+  };
+  const uploadRecipe = async function (url, uploadData = undefined) {
+    try {
+      const fetchPro = uploadData
+        ? fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(uploadData),
+          })
+        : fetch(url);
+
+      // if timeout finishes 1st, will result in rejected promise and trigger catch block below;
+      // Forkify API will return back the data we send to it
+      const res = await Promise.race([
+        fetchPro,
+        timeout(+`${import.meta.env.VITE_TIMEOUT_SEC}`),
+      ]);
+      console.log('getJSON res:', res);
+
+      const data = await res.json();
+      console.log('getJSON data:', data);
+
+      if (!res.ok) throw new Error(`${data.message} (${res.status}😫)`);
+
+      return data; // return resolved value of res.json() above
+    } catch (err) {
+      console.log('getJSON err:', err);
+      throw err; // must throw error if we want error to be resolved in function that calls getJSON()
+    }
+  };
+
+  const createRecipeObject = (data) => {
+    const { recipe } = data.data;
+
+    return {
+      id: recipe.id,
+      title: recipe.title,
+      publisher: recipe.publisher,
+      sourceUrl: recipe.source_url,
+      image: recipe.image_url,
+      servings: recipe.servings,
+      cookingTime: recipe.cooking_time,
+      ingredients: recipe.ingredients,
+      ...(recipe.key && { key: recipe.key }),
+    };
+  };
+
+  const submitHandler = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
-    props.onClose();
+    const dataArray = [...new FormData(e.target)];
+    const data = Object.fromEntries(dataArray);
+
+    const ingredients = Object.entries(data)
+      .filter((entry) => entry[0].startsWith('ingredient') && entry[1] !== '')
+      .map((ing) => {
+        const ingArr = ing[1].split(',').map((el) => el.trim());
+        // const ingArr = ing[1].replaceAll(' ', '').split(',');
+        if (ingArr.length !== 3)
+          throw new Error(
+            'Wrong ingredient format.  Please use the correct format :)'
+          );
+
+        const [quantity, unit, description] = ingArr;
+        return { quantity: quantity ? +quantity : null, unit, description };
+      });
+
+    const recipe = {
+      title: data.title,
+      source_url: data.sourceUrl,
+      image_url: data.image,
+      publisher: data.publisher,
+      cooking_time: +data.cookingTime,
+      servings: +data.servings,
+      ingredients,
+    };
+
+    const url = `${import.meta.env.VITE_API_URL}?key=${
+      import.meta.env.VITE_KEY
+    }`;
+
+    const returnData = await uploadRecipe(url, recipe);
+    const returnRecipe = createRecipeObject(returnData);
+    console.log(returnRecipe);
+
+    siteCtx.setCurrentRecipe(returnRecipe);
+    siteCtx.toggleBookmark(returnRecipe.id);
+
+    // setIsLoading(false);
+    // props.onClose();
   };
 
   return (
@@ -20,12 +119,17 @@ const AddRecipe = (props) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.3, type: 'tween'}}
+        transition={{ duration: 0.3, type: 'tween' }}
       >
         <h1>Add Recipe</h1>
         <Button modalClose onClick={props.onClose}>
           &times;
         </Button>
+        {isLoading && (
+          <div className={classes.spinner}>
+            <LoadingSpinner />
+          </div>
+        )}
         <form className={classes.upload} onSubmit={submitHandler}>
           <div className={classes.column}>
             <h3 className="heading">Recipe data</h3>

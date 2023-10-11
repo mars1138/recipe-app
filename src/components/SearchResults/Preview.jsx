@@ -6,6 +6,8 @@ import classes from './Preview.module.css';
 const Preview = (props) => {
   const siteCtx = useContext(SiteContext);
 
+  console.log(props.item.key);
+
   const previewClasses = `${classes.preview} ${
     siteCtx.currentRecipe && siteCtx.currentRecipe.id === props.item.id
       ? classes.selected
@@ -16,7 +18,7 @@ const Preview = (props) => {
     (item) => item.id === props.item.id
   );
 
-  const userCreated = bookmarked ? (
+  const userCreated = !props.item.key ? (
     ''
   ) : (
     <div className={classes['user-created']}>
