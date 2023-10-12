@@ -1,6 +1,17 @@
 .pagination {
+  width: 80%;
   display: flex;
   margin: auto auto 5rem auto;
+  /* justify-content: space-between; */
+  /* border: 1px solid blue; */
+}
+
+.prev {
+  margin-right: auto;
+}
+
+.next {
+  margin-left: auto;
 }
 
 /* .pagination svg {

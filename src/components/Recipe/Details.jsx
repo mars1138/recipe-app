@@ -64,9 +64,13 @@ const Details = (props) => {
       </div>
 
       <div className={classes['user-created']}>
-        <svg>
-          <use href="src/assets/icons.svg#icon-user"></use>
-        </svg>
+        {props.recipeKey && (
+          <div>
+            <svg>
+              <use href="src/assets/icons.svg#icon-user"></use>
+            </svg>
+          </div>
+        )}
       </div>
       <Button round onClick={bookmarkHandler}>
         <svg className="">

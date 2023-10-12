@@ -6,17 +6,11 @@ import classes from './Preview.module.css';
 const Preview = (props) => {
   const siteCtx = useContext(SiteContext);
 
-  console.log(props.item.key);
-
   const previewClasses = `${classes.preview} ${
     siteCtx.currentRecipe && siteCtx.currentRecipe.id === props.item.id
       ? classes.selected
       : ''
   }`;
-
-  const bookmarked = siteCtx.bookmarks.findIndex(
-    (item) => item.id === props.item.id
-  );
 
   const userCreated = !props.item.key ? (
     ''
@@ -28,26 +22,9 @@ const Preview = (props) => {
     </div>
   );
 
-  //   const timeout = (s) => {
-  //     return new Promise((_, reject) => {
-  //       setTimeout(() => {
-  //         reject(
-  //           new Error(`Request took too long!  Timeout after ${s} seconds.`)
-  //         );
-  //       }, s * 1000);
-  //     });
-  //   };
-
   const getRecipeDetails = async (url) => {
     try {
-      const res = await fetch(url);
-      //   console.log(res);
-      const data = await res.json();
-      //   console.log(data);
-
-      if (!res.ok) throw new Error(`${data.message} (${res.status}😫)`);
-
-      //   setIsLoading(false);
+      const data = await props.sendRequest(url);
       return data.data.recipe;
     } catch (err) {
       console.log(err);

@@ -7,15 +7,33 @@ import classes from './ResultsList.module.css';
 
 const ResultsList = (props) => {
   const siteCtx = useContext(SiteContext);
+  const curPage = siteCtx.page;
+  const queryResults = siteCtx.queryResults;
   let previewList = [];
   let content;
 
-  // console.log('results: ', siteCtx.queryResults);
+  const getSearchResultsPage = (page) => {
+    // state.search.page = page;
+
+    const start = (page - 1) * import.meta.env.VITE_RES_PER_PAGE;
+    const end = page * import.meta.env.VITE_RES_PER_PAGE;
+
+    return queryResults.slice(start, end);
+  };
 
   if (siteCtx.queryResults.length > 0) {
-    // console.log('Query results present!');
-    siteCtx.queryResults.forEach((result) => {
-      previewList.push(<Preview item={result} key={result.id} />);
+    const pageContents = getSearchResultsPage(curPage);
+    console.log('pageContents: ', pageContents);
+
+    pageContents.forEach((result, i) => {
+      previewList.push(
+        <Preview
+          item={result}
+          key={i}
+          index={i}
+          sendRequest={props.sendRequest}
+        />
+      );
     });
 
     content = <ul className={classes.results}>{previewList}</ul>;

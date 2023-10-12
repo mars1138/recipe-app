@@ -79,6 +79,7 @@ const Recipe = (props) => {
             cookTime={curRecipe.cooking_time}
             servings={curRecipe.servings}
             recipeId={curRecipe.id}
+            recipeKey={curRecipe.key}
           />
           <Ingredients ingredients={curRecipe.ingredients} />
           <Directions

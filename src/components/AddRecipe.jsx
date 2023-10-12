@@ -5,50 +5,12 @@ import Backdrop from '../UI-elements/Backdrop';
 import Button from '../UI-elements/Button';
 import LoadingSpinner from '../UI-elements/LoadingSpinner';
 import SiteContext from '../components/store/site-context';
+import { useHttpRequest } from '../components/hooks/http-hook';
 import classes from './AddRecipe.module.css';
 
 const AddRecipe = (props) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const { isSubmitting, error, sendRequest, clearError } = useHttpRequest();
   const siteCtx = useContext(SiteContext);
-
-  const timeout = function (s) {
-    return new Promise(function (_, reject) {
-      setTimeout(function () {
-        reject(new Error(`Request took too long! Timeout after ${s} second`));
-      }, s * 1000);
-    });
-  };
-  const uploadRecipe = async function (url, uploadData = undefined) {
-    try {
-      const fetchPro = uploadData
-        ? fetch(url, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(uploadData),
-          })
-        : fetch(url);
-
-      // if timeout finishes 1st, will result in rejected promise and trigger catch block below;
-      // Forkify API will return back the data we send to it
-      const res = await Promise.race([
-        fetchPro,
-        timeout(+`${import.meta.env.VITE_TIMEOUT_SEC}`),
-      ]);
-      console.log('getJSON res:', res);
-
-      const data = await res.json();
-      console.log('getJSON data:', data);
-
-      if (!res.ok) throw new Error(`${data.message} (${res.status}😫)`);
-
-      return data; // return resolved value of res.json() above
-    } catch (err) {
-      console.log('getJSON err:', err);
-      throw err; // must throw error if we want error to be resolved in function that calls getJSON()
-    }
-  };
 
   const createRecipeObject = (data) => {
     const { recipe } = data.data;
@@ -67,7 +29,6 @@ const AddRecipe = (props) => {
   };
 
   const submitHandler = async (e) => {
-    setIsLoading(true);
     e.preventDefault();
     const dataArray = [...new FormData(e.target)];
     const data = Object.fromEntries(dataArray);
@@ -100,15 +61,11 @@ const AddRecipe = (props) => {
       import.meta.env.VITE_KEY
     }`;
 
-    const returnData = await uploadRecipe(url, recipe);
+    const returnData = await sendRequest(url, recipe);
     const returnRecipe = createRecipeObject(returnData);
-    console.log(returnRecipe);
 
     siteCtx.setCurrentRecipe(returnRecipe);
     siteCtx.toggleBookmark(returnRecipe.id);
-
-    // setIsLoading(false);
-    // props.onClose();
   };
 
   return (
@@ -125,7 +82,7 @@ const AddRecipe = (props) => {
         <Button modalClose onClick={props.onClose}>
           &times;
         </Button>
-        {isLoading && (
+        {isSubmitting && (
           <div className={classes.spinner}>
             <LoadingSpinner />
           </div>

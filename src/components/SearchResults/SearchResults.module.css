@@ -4,3 +4,15 @@
   display: flex;
   flex-direction: column;
 }
+
+.copy {
+  margin-left: 2rem;
+}
+
+.link:link,
+.link:hover,
+.link:visited,
+.link:active {
+  text-decoration: none;
+  color: var(--color-primary); 
+}

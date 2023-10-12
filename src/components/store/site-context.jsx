@@ -12,6 +12,7 @@ const SiteContext = React.createContext({
   setBookmarks: (bookmarks) => {},
   updateServings: (servings) => {},
   clearBookmarks: () => {},
+  setPage: (page) => {},
 });
 
 export default SiteContext;

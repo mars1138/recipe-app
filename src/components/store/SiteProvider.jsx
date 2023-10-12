@@ -182,6 +182,16 @@ const siteReducer = (state, action) => {
       page: state.page,
     };
   }
+
+  if (action.type === 'PAGE') {
+    return {
+      currentRecipe: state.currentRecipe,
+      query: state.query,
+      queryResults: state.queryResults,
+      bookmarks: state.bookmarks,
+      page: action.page,
+    };
+  }
 };
 
 const SiteProvider = (props) => {
@@ -230,6 +240,10 @@ const SiteProvider = (props) => {
     dispatchSiteAction({ type: 'CLEAR' });
   };
 
+  const pageHandler = (page) => {
+    dispatchSiteAction({ type: 'PAGE', page: page });
+  };
+
   const siteContext = {
     currentRecipe: siteState.currentRecipe,
     query: siteState.query,
@@ -242,6 +256,7 @@ const SiteProvider = (props) => {
     setBookmarks: bookmarksHandler,
     updateServings: servingsHandler,
     clearBookmarks: clearHandler,
+    setPage: pageHandler,
   };
 
   return (

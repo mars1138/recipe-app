@@ -124,19 +124,22 @@
 }
 
 .user-created {
-  background-color: var(--color-grey-light-1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   height: 4rem;
   width: 4rem;
   border-radius: var(--borderRadius-button);
   margin-left: auto;
   margin-right: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.user-created div {
+  background-color: var(--color-grey-light-1);
 }
 .user-created svg {
   height: 2.25rem;
   width: 2.25rem;
+  fill: var(--color-primary);
 }
 
 /***** INGREDIENTS *****/
