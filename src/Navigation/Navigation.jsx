@@ -12,7 +12,6 @@ const Navigation = (props) => {
   let dropDown;
 
   const hoverHandler = () => {
-    console.log('hoverhandler...');
     setHover((prev) => !prev);
   };
 

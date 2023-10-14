@@ -135,12 +135,8 @@ const siteReducer = (state, action) => {
   }
 
   if (action.type === 'BOOKMARKS') {
-    console.log('action.bk: ', action.bookmarks);
     const updatedBookmarks = action.bookmarks;
-    // action.bookmarks.forEach((bk) => {
-    //   updatedBookmarks.push(bk);
-    // });
-    console.log(updatedBookmarks);
+
     return {
       currentRecipe: state.currentRecipe,
       query: state.query,
@@ -159,8 +155,6 @@ const siteReducer = (state, action) => {
       ing.quantity =
         (ing.quantity * action.servings) / state.currentRecipe.servings;
     });
-
-    console.log(updatedRecipe);
 
     return {
       currentRecipe: updatedRecipe,

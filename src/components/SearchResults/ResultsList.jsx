@@ -13,8 +13,6 @@ const ResultsList = (props) => {
   let content;
 
   const getSearchResultsPage = (page) => {
-    // state.search.page = page;
-
     const start = (page - 1) * import.meta.env.VITE_RES_PER_PAGE;
     const end = page * import.meta.env.VITE_RES_PER_PAGE;
 
@@ -23,7 +21,7 @@ const ResultsList = (props) => {
 
   if (siteCtx.queryResults.length > 0) {
     const pageContents = getSearchResultsPage(curPage);
-    console.log('pageContents: ', pageContents);
+    // console.log('pageContents: ', pageContents);
 
     pageContents.forEach((result, i) => {
       previewList.push(

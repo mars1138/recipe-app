@@ -37,7 +37,6 @@ const Preview = (props) => {
       const recipe = await getRecipeDetails(
         `${import.meta.env.VITE_API_URL}${props.item.id}`
       );
-      console.log(recipe);
       siteCtx.setCurrentRecipe(recipe);
     }
   };

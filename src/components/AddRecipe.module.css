@@ -32,6 +32,9 @@
   grid-column: 1/-1;
   border-bottom: 1px solid var(--color-primary);
 }
+.add-error {
+  filter: contrast(0.2);
+}
 
 .upload {
   display: grid;
@@ -90,8 +93,8 @@
 }
 
 .spinner {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%)
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

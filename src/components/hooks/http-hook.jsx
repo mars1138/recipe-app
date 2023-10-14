@@ -25,26 +25,25 @@ export const useHttpRequest = () => {
           })
         : fetch(url);
 
-      // if timeout finishes 1st, will result in rejected promise and trigger catch block below;
-      // Forkify API will return back the data we send to it
+      // if timeout finishes 1st, will result in rejected promise and trigger catch block;
       const res = await Promise.race([
         fetchPro,
         timeout(+`${import.meta.env.VITE_TIMEOUT_SEC}`),
       ]);
-      console.log('getJSON res:', res);
+      // console.log('getJSON res:', res);
 
       const data = await res.json();
-      console.log('getJSON data:', data);
+      // console.log('getJSON data:', data);
 
       if (!res.ok) throw new Error(`${data.message} (${res.status}😫)`);
 
       setIsSubmitting(false);
-      return data; // return resolved value of res.json() above
+      return data;
     } catch (err) {
-      console.log('getJSON err:', err);
+      // console.log('getJSON err:', err);
       setError(err.message);
       setIsSubmitting(false);
-      throw err; // must throw error if we want error to be resolved in function that calls getJSON()
+      throw err;
     }
   }, []);
 

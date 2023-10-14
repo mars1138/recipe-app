@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Backdrop from '../UI-elements/Backdrop';
 import Button from '../UI-elements/Button';
 import LoadingSpinner from '../UI-elements/LoadingSpinner';
+import Modal from '../UI-elements/Modal';
 import SiteContext from '../components/store/site-context';
 import { useHttpRequest } from '../components/hooks/http-hook';
 import classes from './AddRecipe.module.css';
@@ -37,7 +38,6 @@ const AddRecipe = (props) => {
       .filter((entry) => entry[0].startsWith('ingredient') && entry[1] !== '')
       .map((ing) => {
         const ingArr = ing[1].split(',').map((el) => el.trim());
-        // const ingArr = ing[1].replaceAll(' ', '').split(',');
         if (ingArr.length !== 3)
           throw new Error(
             'Wrong ingredient format.  Please use the correct format :)'
@@ -68,11 +68,21 @@ const AddRecipe = (props) => {
     siteCtx.toggleBookmark(returnRecipe.id);
   };
 
+  const addClasses = `${classes['add-recipe']} ${
+    error && classes['add-error']
+  }`;
+
   return (
     <Fragment>
+      {error && (
+        <Modal header={error} onClose={clearError}>
+            <p>Error!</p>
+        </Modal>
+      )}
       <Backdrop onClick={props.onClose} />
       <motion.div
-        className={classes['add-recipe']}
+        // className={classes['add-recipe']}
+        className={addClasses}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}

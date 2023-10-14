@@ -1,4 +1,15 @@
 .modal {
   position: fixed;
-  z-index: 200;
+  z-index: 900;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 20rem;
+  width: 40rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  border-radius: var(--borderRadius-modal);
 }

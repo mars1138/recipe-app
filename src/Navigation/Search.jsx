@@ -4,11 +4,6 @@ import Button from '../UI-elements/Button';
 import classes from './Search.module.css';
 
 const Search = (props) => {
-  //   const submitHandler = (e) => {
-  //     e.preventDefault();
-  //     props.searchRecipe();
-  //     console.log('search submitted');
-  //   };
   const inputRef = useRef();
 
   return (
@@ -16,7 +11,6 @@ const Search = (props) => {
       className={classes.search}
       onSubmit={(e) => {
         e.preventDefault();
-        console.log(inputRef.current.value);
         props.searchRecipe(inputRef.current.value);
       }}
     >
