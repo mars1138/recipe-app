@@ -14,7 +14,7 @@ const Directions = (props) => {
         <Button small>
           <span>Directions</span>
           <svg className={classes.icon}>
-            <use href="src/assets/icons.svg#icon-arrow-right"></use>
+            <use href="icons.svg#icon-arrow-right"></use>
           </svg>
         </Button>
       </a>

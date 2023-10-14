@@ -9,7 +9,7 @@ const Ingredients = (props) => {
       list.push(
         <li className={classes['ingredient']} key={i}>
           <svg className="recipe__icon">
-            <use href="src/assets/icons.svg#icon-check"></use>
+            <use href="icons.svg#icon-check"></use>
           </svg>
           <div className={classes.quantity}>{fracty(item.quantity)}</div>
           <div className={classes.description}>

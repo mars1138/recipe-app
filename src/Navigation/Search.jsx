@@ -22,7 +22,7 @@ const Search = (props) => {
       />
       <Button type="submit">
         <svg>
-          <use href="src/assets/icons.svg#icon-search"></use>
+          <use href="icons.svg#icon-search"></use>
         </svg>
         Search
       </Button>

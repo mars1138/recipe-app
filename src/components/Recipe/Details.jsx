@@ -27,14 +27,14 @@ const Details = (props) => {
     <div className={classes.details}>
       <div className={classes.info}>
         <svg>
-          <use href="src/assets/icons.svg#icon-clock"></use>
+          <use href="icons.svg#icon-clock"></use>
         </svg>
         <span className={classes.data}>{props.cookTime}</span>
         <span className={classes.text}>minutes</span>
       </div>
       <div className={classes.info}>
         <svg>
-          <use href="src/assets/icons.svg#icon-users"></use>
+          <use href="icons.svg#icon-users"></use>
         </svg>
         <span className={classes.data}>{props.servings}</span>
         <span className={classes.text}>servings</span>
@@ -47,7 +47,7 @@ const Details = (props) => {
             }}
           >
             <svg>
-              <use href="src/assets/icons.svg#icon-minus-circle"></use>
+              <use href="icons.svg#icon-minus-circle"></use>
             </svg>
           </Button>
           <Button
@@ -57,7 +57,7 @@ const Details = (props) => {
             }}
           >
             <svg>
-              <use href="src/assets/icons.svg#icon-plus-circle"></use>
+              <use href="icons.svg#icon-plus-circle"></use>
             </svg>
           </Button>
         </div>
@@ -67,7 +67,7 @@ const Details = (props) => {
         {props.recipeKey && (
           <div>
             <svg>
-              <use href="src/assets/icons.svg#icon-user"></use>
+              <use href="icons.svg#icon-user"></use>
             </svg>
           </div>
         )}
@@ -75,7 +75,7 @@ const Details = (props) => {
       <Button round onClick={bookmarkHandler}>
         <svg className="">
           <use
-            href={`src/assets/icons.svg#icon-bookmark${isSaved ? '-fill' : ''}`}
+            href={`''icons.svg#icon-bookmark${isSaved ? '-fill' : ''}`}
           ></use>
         </svg>
       </Button>

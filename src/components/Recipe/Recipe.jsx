@@ -17,7 +17,7 @@ const Recipe = (props) => {
     <div className={classes.error}>
       <div>
         <svg>
-          <use href="src/assets/icons.svg#icon-alert-triangle"></use>
+          <use href="icons.svg#icon-alert-triangle"></use>
         </svg>
       </div>
       <p>No recipes found for your query. Please try again!</p>
@@ -28,7 +28,7 @@ const Recipe = (props) => {
     <div className={classes.message}>
       <div>
         <svg>
-          <use href="src/assets/icons.svg#icon-smile"></use>
+          <use href="icons.svg#icon-smile"></use>
         </svg>
       </div>
       <p>

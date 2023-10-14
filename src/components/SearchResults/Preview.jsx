@@ -17,7 +17,7 @@ const Preview = (props) => {
   ) : (
     <div className={classes['user-created']}>
       <svg>
-        <use href="src/assets/icons.svg#icon-user"></use>
+        <use href="icons.svg#icon-user"></use>
       </svg>
     </div>
   );

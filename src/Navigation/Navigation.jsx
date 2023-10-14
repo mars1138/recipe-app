@@ -19,7 +19,7 @@ const Navigation = (props) => {
     <li className={classes.message}>
       <div>
         <svg>
-          <use href="src/assets/icons.svg#icon-smile"></use>
+          <use href="icons.svg#icon-smile"></use>
         </svg>
       </div>
       <p>
@@ -48,7 +48,7 @@ const Navigation = (props) => {
         <li>
           <Button navButton onClick={props.addRecipe}>
             <svg>
-              <use href="src/assets/icons.svg#icon-edit"></use>
+              <use href="icons.svg#icon-edit"></use>
             </svg>
             <span>Add Recipe</span>
           </Button>
@@ -60,7 +60,7 @@ const Navigation = (props) => {
         >
           <Button navButton>
             <svg>
-              <use href="src/assets/icons.svg#icon-smile"></use>
+              <use href="icons.svg#icon-smile"></use>
             </svg>
             <span>Bookmarks</span>
           </Button>

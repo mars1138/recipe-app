@@ -28,7 +28,7 @@ const Pagination = (props) => {
         <div className={classes.prev}>
           <Button pagination onClick={prevHandler}>
             <svg>
-              <use href="src/assets/icons.svg#icon-arrow-left"></use>
+              <use href="icons.svg#icon-arrow-left"></use>
             </svg>
             <span>Page {curPage - 1}</span>
           </Button>
@@ -39,7 +39,7 @@ const Pagination = (props) => {
           <Button pagination onClick={nextHandler}>
             <span>Page {curPage + 1}</span>
             <svg>
-              <use href="src/assets/icons.svg#icon-arrow-right"></use>
+              <use href="icons.svg#icon-arrow-right"></use>
             </svg>
           </Button>
         </div>

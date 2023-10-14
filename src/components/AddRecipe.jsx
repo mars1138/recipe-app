@@ -76,7 +76,7 @@ const AddRecipe = (props) => {
     <Fragment>
       {error && (
         <Modal header={error} onClose={clearError}>
-            <p>Error!</p>
+          <p>Error!</p>
         </Modal>
       )}
       <Backdrop onClick={props.onClose} />
@@ -176,7 +176,7 @@ const AddRecipe = (props) => {
           <div className={classes.button}>
             <Button type="submit" small>
               <svg>
-                <use href="src/assets/icons.svg#icon-upload-cloud"></use>
+                <use href="icons.svg#icon-upload-cloud"></use>
               </svg>
               <span>Upload</span>
             </Button>
