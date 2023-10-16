@@ -68,7 +68,7 @@ const defaultSiteState = {
   currentRecipe: null,
   query: '',
   queryResults: [],
-  bookmarks: [...testBookmarks],
+  bookmarks: [],
   page: 1,
 };
 
@@ -167,11 +167,13 @@ const siteReducer = (state, action) => {
 
   if (action.type === 'CLEAR') {
     localStorage.clear('forkify-bookmarks');
+    const recipe = state.currentRecipe;
+    const results = state.queryResults;
 
     return {
-      currentRecipe: state.currentRecipe,
+      currentRecipe: recipe,
       query: state.query,
-      queryResults: state.queryResults,
+      queryResults: results,
       bookmarks: [],
       page: state.page,
     };

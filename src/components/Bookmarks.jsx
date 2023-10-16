@@ -14,22 +14,24 @@ const Bookmarks = (props) => {
     content.push(<Preview item={item} key={i} />);
   });
 
-  content.push(
-    <li key="clear">
-      <div className={classes.button}>
-        <Button
-          small
-          onClick={() => {
-            siteCtx.clearBookmarks();
-            props.onClear();
-            window.location.replace('/');
-          }}
-        >
-          Clear
-        </Button>
-      </div>
-    </li>
-  );
+  if (siteCtx.bookmarks.length > 0) {
+    content.push(
+      <li key="clear">
+        <div className={classes.button}>
+          <Button
+            small
+            onClick={() => {
+              siteCtx.clearBookmarks();
+              props.onClear();
+              // window.location.replace('/');
+            }}
+          >
+            Clear
+          </Button>
+        </div>
+      </li>
+    );
+  }
 
   return content;
 };

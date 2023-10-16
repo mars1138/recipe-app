@@ -75,8 +75,8 @@ const AddRecipe = (props) => {
   return (
     <Fragment>
       {error && (
-        <Modal header={error} onClose={clearError}>
-          <p>Error!</p>
+        <Modal header="Error: Unable to save recipe!" onClose={clearError}>
+          {error.message}
         </Modal>
       )}
       <Backdrop onClick={props.onClose} />

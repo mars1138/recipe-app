@@ -8,14 +8,16 @@ import classes from './Modal.module.css';
 const ModalOverlay = (props) => {
   const content = (
     <div className={classes.modal}>
-      <h2>{props.header}</h2>
-      <div>{props.children}</div>
+      <h2 className={classes.header}>{props.header}</h2>
+      <div className={classes.message}>{props.children}</div>
 
       {props.footer && <div>{props.footer}</div>}
 
       {!props.footer && (
-        <div>
-          <Button onClick={props.onClose}>Close</Button>
+        <div className={classes.footer}>
+          <Button small onClick={props.onClose}>
+            Close
+          </Button>
         </div>
       )}
     </div>

@@ -74,9 +74,7 @@ const Details = (props) => {
       </div>
       <Button round onClick={bookmarkHandler}>
         <svg className="">
-          <use
-            href={`''icons.svg#icon-bookmark${isSaved ? '-fill' : ''}`}
-          ></use>
+          <use href={`icons.svg#icon-bookmark${isSaved ? '-fill' : ''}`}></use>
         </svg>
       </Button>
     </div>

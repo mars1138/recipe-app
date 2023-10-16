@@ -1,5 +1,6 @@
 .recipe {
   grid-area: recipe;
+  background-color: var(--color-grey-light-1);
 }
 
 .message,

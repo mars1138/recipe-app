@@ -4,12 +4,31 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: 20rem;
-  width: 40rem;
+  height: 22rem;
+  width: 43rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
   background-color: white;
   border-radius: var(--borderRadius-modal);
+  overflow: hidden;
+}
+
+.header {
+  min-height: 5rem;
+  width: 100%;
+  background-color: var(--color-grad-1);
+  display: flex;
+  align-items: center;
+  padding-left: 2rem;
+}
+.message {
+  padding: 2rem;
+  font-size: 1.25rem;
+  
+}
+
+.footer {
+  margin-top: auto;
+  padding: 1rem 0 1.5rem;
 }

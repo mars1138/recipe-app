@@ -60,6 +60,9 @@
   transform: none;
   background-color: var(--color-grey-light-2);
 }
+/* .nav:hover a {
+  text-decoration: underline;
+} */
 
 .nav svg {
   height: 2.4rem;
@@ -67,6 +70,24 @@
   fill: var(--color-primary);
   margin-right: 0.7rem;
   /* transform: translateY(-1px); */
+}
+
+.nav a {
+  font-size: inherit;
+  color: inherit;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+.nav a:link,
+.nav a:visited,
+.nav a:active {
+  text-decoration: none;
+}
+.nav a:hover {
+  text-decoration: underline;
 }
 
 .pagination {

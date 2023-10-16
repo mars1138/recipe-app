@@ -60,11 +60,21 @@ const Navigation = (props) => {
         >
           <Button navButton>
             <svg>
-              <use href="icons.svg#icon-smile"></use>
+              <use href="icons.svg#icon-bookmark"></use>
             </svg>
             <span>Bookmarks</span>
           </Button>
           <AnimatePresence>{hover && dropDown}</AnimatePresence>
+        </li>
+        <li>
+          <Button navButton>
+            <a href="https://forkify-mars.netlify.app/">
+              <svg>
+                <use href="icons.svg#icon-loader"></use>
+              </svg>
+              JS Version
+            </a>
+          </Button>
         </li>
       </ul>
     </nav>

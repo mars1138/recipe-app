@@ -33,15 +33,15 @@ export const useHttpRequest = () => {
       // console.log('getJSON res:', res);
 
       const data = await res.json();
-      // console.log('getJSON data:', data);
+      console.log('getJSON data:', data);
 
       if (!res.ok) throw new Error(`${data.message} (${res.status}😫)`);
 
       setIsSubmitting(false);
       return data;
     } catch (err) {
-      // console.log('getJSON err:', err);
-      setError(err.message);
+      console.log('sendrequest err:', err);
+      setError(err);
       setIsSubmitting(false);
       throw err;
     }

@@ -13,8 +13,13 @@
   height: 100%;
 }
 
+/* allows link in last button to fill entire space */
+.nav-list li:last-of-type button {
+  padding: 0;
+}
+
 .bookmarks {
-  padding: 1rem 0;
+  padding: 0;
   position: absolute;
   right: -2.5rem;
   z-index: 10;
