@@ -73,7 +73,7 @@ body {
   background-color: #fff;
   border-radius: 9px;
   overflow: hidden;
-  box-shadow: var(--card-shadow);
+  box-shadow: var(--shadow-card);
 
   display: grid;
   grid-template-rows: 10rem minmax(100rem, auto);

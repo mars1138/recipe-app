@@ -10,6 +10,7 @@ import { useHttpRequest } from '../components/hooks/http-hook';
 import classes from './AddRecipe.module.css';
 
 const AddRecipe = (props) => {
+  const [formError, setFormError] = useState();
   const { isSubmitting, error, sendRequest, clearError } = useHttpRequest();
   const siteCtx = useContext(SiteContext);
 
@@ -31,21 +32,25 @@ const AddRecipe = (props) => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    setFormError(null);
     const dataArray = [...new FormData(e.target)];
     const data = Object.fromEntries(dataArray);
+    let ingredients;
 
-    const ingredients = Object.entries(data)
-      .filter((entry) => entry[0].startsWith('ingredient') && entry[1] !== '')
-      .map((ing) => {
-        const ingArr = ing[1].split(',').map((el) => el.trim());
-        if (ingArr.length !== 3)
-          throw new Error(
-            'Wrong ingredient format.  Please use the correct format :)'
-          );
+    try {
+      ingredients = Object.entries(data)
+        .filter((entry) => entry[0].startsWith('ingredient') && entry[1] !== '')
+        .map((ing, i) => {
+          const ingArr = ing[1].split(',').map((el) => el.trim());
+          if (ingArr.length !== 3) throw new Error(`${i}`);
 
-        const [quantity, unit, description] = ingArr;
-        return { quantity: quantity ? +quantity : null, unit, description };
-      });
+          const [quantity, unit, description] = ingArr;
+          return { quantity: quantity ? +quantity : null, unit, description };
+        });
+    } catch (err) {
+      setFormError(+err.message);
+      return;
+    }
 
     const recipe = {
       title: data.title,
@@ -133,6 +138,7 @@ const AddRecipe = (props) => {
             <h3 className="heading">Ingredients</h3>
             <label>Ingredient 1</label>
             <input
+              className={formError + 1 === 1 ? classes.alert : ''}
               defaultValue="0.5,kg,Rice"
               type="text"
               required
@@ -141,6 +147,7 @@ const AddRecipe = (props) => {
             />
             <label>Ingredient 2</label>
             <input
+              className={formError + 1 === 2 ? classes.alert : ''}
               defaultValue="1,,Avocado"
               type="text"
               name="ingredient-2"
@@ -148,6 +155,7 @@ const AddRecipe = (props) => {
             />
             <label>Ingredient 3</label>
             <input
+              className={formError + 1 === 3 ? classes.alert : ''}
               defaultValue=",,salt"
               type="text"
               name="ingredient-3"
@@ -155,22 +163,34 @@ const AddRecipe = (props) => {
             />
             <label>Ingredient 4</label>
             <input
+              className={formError + 1 === 4 ? classes.alert : ''}
               type="text"
               name="ingredient-4"
               placeholder="Format: 'Quantity,Unit,Description'"
             />
             <label>Ingredient 5</label>
             <input
+              className={formError + 1 === 5 ? classes.alert : ''}
               type="text"
               name="ingredient-5"
               placeholder="Format: 'Quantity,Unit,Description'"
             />
             <label>Ingredient 6</label>
             <input
+              className={formError + 1 === 6 ? classes.alert : ''}
               type="text"
               name="ingredient-6"
               placeholder="Format: 'Quantity,Unit,Description'"
             />
+          </div>
+
+          <div className={classes.error}>
+            {formError && (
+              <p>{`Wrong ingredient format in ingredient #${
+                +formError + 1
+              }.  Please use the correct format: 'Qty,Unit,Description'`}</p>
+            )}
+            {!formError && <p>&nbsp;</p>}
           </div>
 
           <div className={classes.button}>

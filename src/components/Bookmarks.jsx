@@ -16,7 +16,7 @@ const Bookmarks = (props) => {
 
   if (siteCtx.bookmarks.length > 0) {
     content.push(
-      <li key="clear">
+      // <li key="clear">
         <div className={classes.button}>
           <Button
             small
@@ -29,7 +29,7 @@ const Bookmarks = (props) => {
             Clear
           </Button>
         </div>
-      </li>
+      // </li>
     );
   }
 

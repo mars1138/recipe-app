@@ -25,12 +25,12 @@
   z-index: 10;
   width: 40rem;
   background-color: #fff;
-  box-shadow: 0 0.8rem 5rem 2rem rgba(var(--color-grey-dark-1), 0.1);
+  /* box-shadow: 0 0.8rem 5rem 2rem rgba(var(--color-grey-dark-1), 0.1); */
+  box-shadow: var(--shadow-card);
 }
 
 .bookmarks-list {
   list-style: none;
-  box-shadow: var(--shadow-card);
 }
 
 .message {
