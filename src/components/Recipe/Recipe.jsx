@@ -1,4 +1,4 @@
-import { Fragment, useState, useContext, useEffect } from 'react';
+import { Fragment, useContext } from 'react';
 
 import Figure from './Figure';
 import Details from './Details';
@@ -10,17 +10,28 @@ import classes from './Recipe.module.css';
 
 const Recipe = (props) => {
   const siteCtx = useContext(SiteContext);
-  const isLoading = props.isLoading;
+  const isLoading = props.recipeSubmitting;
+  const recipeErr = props.recipeErr;
+  const queryErr = props.queryErr;
   const curRecipe = siteCtx.currentRecipe;
+  console.log(queryErr);
+  console.log(recipeErr);
 
-  const noRecipeFound = (
+  const errorMsg = (
     <div className={classes.error}>
       <div>
         <svg>
           <use href="icons.svg#icon-alert-triangle"></use>
         </svg>
       </div>
-      <p>No recipes found for your query. Please try again!</p>
+      <p>
+        {props?.queryErr?.message && props?.queryErr?.message !== undefined
+          ? props.queryErr.message
+          : ''}
+        {props?.recipeErr?.message && props?.recipeErr?.message !== undefined
+          ? props.recipeErr.message
+          : ''}
+      </p>
     </div>
   );
 
@@ -41,9 +52,9 @@ const Recipe = (props) => {
   return (
     <div className={classes.recipe}>
       {isLoading && <LoadingSpinner />}
-      {!isLoading && !curRecipe && startSearch}
-      {!isLoading && props.error && noRecipeFound}
-      {!isLoading && !props.error && curRecipe && (
+      {!isLoading && !curRecipe && !recipeErr && !queryErr && startSearch}
+      {!isLoading && (recipeErr || queryErr) && errorMsg}
+      {!isLoading && !recipeErr && curRecipe && (
         <Fragment>
           <Figure imgUrl={curRecipe.image_url} title={curRecipe.title} />
           <Details

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 
 import classes from './Backdrop.module.css';
 
+// backdrop blurs out background behind modal/window
 const Backdrop = (props) => {
   return ReactDom.createPortal(
     <motion.div

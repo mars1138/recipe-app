@@ -3,7 +3,8 @@ import Button from '../../UI-elements/Button';
 import SiteContext from '../store/site-context';
 import classes from './Pagination.module.css';
 
-const Pagination = (props) => {
+// prev and next buttons will appear based on current page, total number of query results, and #results displayed per page
+const Pagination = () => {
   const siteCtx = useContext(SiteContext);
   const curPage = siteCtx.page;
   const totalResults = siteCtx.queryResults.length;

@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import SiteContext from '../store/site-context';
 import classes from './Preview.module.css';
 
+// returns component for displaying recipe list item from query results or bookmarks
 const Preview = (props) => {
   const siteCtx = useContext(SiteContext);
 
@@ -12,6 +13,7 @@ const Preview = (props) => {
       : ''
   }`;
 
+  // basic recipe info from query results will include a user key if the recipe was user created
   const userCreated = !props.item.key ? (
     ''
   ) : (
@@ -24,7 +26,7 @@ const Preview = (props) => {
 
   const getRecipeDetails = async (url) => {
     try {
-      const data = await props.sendRequest(url);
+      const data = await props.recipeRequest(url);
       return data.data.recipe;
     } catch (err) {
       console.log(err);

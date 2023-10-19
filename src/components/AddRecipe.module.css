@@ -24,7 +24,7 @@
 
 .add-recipe h1 {
   /* color: var(--color-primary); */
-  font-size: 3.5rem;
+  font-size: 2rem;
   font-weight: 700;
   text-transform: uppercase;
   margin-bottom: 3rem;
@@ -51,7 +51,7 @@
 
 .column h3 {
   color: var(--color-primary);
-  font-size: 2.25rem;
+  font-size: 1.5rem;
   font-weight: 700;
   text-transform: uppercase;
   margin-bottom: 1rem;

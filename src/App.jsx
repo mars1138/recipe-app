@@ -10,26 +10,48 @@ import { useHttpRequest } from './components/hooks/http-hook';
 
 function App() {
   const [addRecipe, setAddRecipe] = useState(false);
-  const { isSubmitting, error, sendRequest, clearError } = useHttpRequest();
   const siteCtx = useContext(SiteContext);
+  const {
+    isSubmitting: querySubmitting,
+    error: queryError,
+    sendRequest: queryRequest,
+    clearError: clearQueryError,
+  } = useHttpRequest();
+  const {
+    isSubmitting: recipeSubmitting,
+    error: recipeError,
+    sendRequest: recipeRequest,
+    clearError: clearRecipeError,
+  } = useHttpRequest();
 
+  // display AddRecipe modal
   const showAddHandler = () => {
     setAddRecipe(true);
   };
+  // close AddRecipe modal
   const hideAddHandler = () => {
     setAddRecipe(false);
   };
 
   const searchHandler = async (query) => {
-    const data = await sendRequest(
-      `${import.meta.env.VITE_API_URL}?search=${query}&key=${
-        import.meta.env.VITE_KEY
-      }`
-    );
-    siteCtx.storeQueryResults(query, data.data.recipes);
+    clearQueryError();
+    clearRecipeError();
+    try {
+      // API returns object that contains array of query results
+      const data = await queryRequest(
+        `${import.meta.env.VITE_API_URL}?search=${query}&key=${
+          import.meta.env.VITE_KEY
+        }`
+      );
+      siteCtx.storeQueryResults(query, data.data.recipes);
+    } catch (err) {
+      // no query results found
+      siteCtx.storeQueryResults(query, []);
+    }
   };
 
   useEffect(() => {
+    // retrieve bookmarks saved from previous browser session
     const bookmarks = JSON.parse(localStorage.getItem('forkify-bookmarks'));
     if (bookmarks && bookmarks.length > 0) siteCtx.setBookmarks(bookmarks);
   }, []);
@@ -37,8 +59,15 @@ function App() {
   const MainBody = (props) => {
     return (
       <Fragment>
-        <SearchResults sendRequest={sendRequest} />
-        <Recipe isLoading={isSubmitting} error={error} />
+        <SearchResults
+          querySubmitting={querySubmitting}
+          recipeRequest={recipeRequest}
+        />
+        <Recipe
+          recipeSubmitting={recipeSubmitting}
+          recipeErr={recipeError}
+          queryErr={queryError}
+        />
       </Fragment>
     );
   };

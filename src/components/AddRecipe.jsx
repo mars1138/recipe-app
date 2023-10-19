@@ -9,6 +9,7 @@ import SiteContext from '../components/store/site-context';
 import { useHttpRequest } from '../components/hooks/http-hook';
 import classes from './AddRecipe.module.css';
 
+// returns window with form to create new recipe, with backdrop
 const AddRecipe = (props) => {
   const [formError, setFormError] = useState();
   const { isSubmitting, error, sendRequest, clearError } = useHttpRequest();
@@ -38,6 +39,7 @@ const AddRecipe = (props) => {
     let ingredients;
 
     try {
+      // ingredient fields must follow string format of 'Quantity,Unit,Description', with no spaces after commas
       ingredients = Object.entries(data)
         .filter((entry) => entry[0].startsWith('ingredient') && entry[1] !== '')
         .map((ing, i) => {
@@ -86,7 +88,6 @@ const AddRecipe = (props) => {
       )}
       <Backdrop onClick={props.onClose} />
       <motion.div
-        // className={classes['add-recipe']}
         className={addClasses}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

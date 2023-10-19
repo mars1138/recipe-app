@@ -2,9 +2,9 @@ import { useContext } from 'react';
 
 import Preview from './Preview';
 import SiteContext from '../store/site-context';
-
 import classes from './ResultsList.module.css';
 
+// returns list of recipe previews to display, based on #of results, current page, and items to display per page
 const ResultsList = (props) => {
   const siteCtx = useContext(SiteContext);
   const curPage = siteCtx.page;
@@ -12,7 +12,7 @@ const ResultsList = (props) => {
   let previewList = [];
   let content;
 
-  const getSearchResultsPage = (page) => {
+  const getPageContents = (page) => {
     const start = (page - 1) * import.meta.env.VITE_RES_PER_PAGE;
     const end = page * import.meta.env.VITE_RES_PER_PAGE;
 
@@ -20,8 +20,7 @@ const ResultsList = (props) => {
   };
 
   if (siteCtx.queryResults.length > 0) {
-    const pageContents = getSearchResultsPage(curPage);
-    // console.log('pageContents: ', pageContents);
+    const pageContents = getPageContents(curPage);
 
     pageContents.forEach((result, i) => {
       previewList.push(
@@ -29,7 +28,7 @@ const ResultsList = (props) => {
           item={result}
           key={i}
           index={i}
-          sendRequest={props.sendRequest}
+          recipeRequest={props.recipeRequest}
         />
       );
     });
@@ -37,7 +36,7 @@ const ResultsList = (props) => {
     content = <ul className={classes.results}>{previewList}</ul>;
   }
 
-  return content ? content : '';
+  return previewList ? content : '';
 };
 
 export default ResultsList;

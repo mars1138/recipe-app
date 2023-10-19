@@ -6,6 +6,7 @@ import classes from './Navigation.module.css';
 import Bookmarks from '../components/Bookmarks';
 import SiteContext from '../components/store/site-context';
 
+// returns nav portion of header
 const Navigation = (props) => {
   const [hover, setHover] = useState(false);
   const siteCtx = useContext(SiteContext);

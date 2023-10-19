@@ -1,6 +1,6 @@
 import { useRef } from 'react';
-import Button from '../UI-elements/Button';
 
+import Button from '../UI-elements/Button';
 import classes from './Search.module.css';
 
 const Search = (props) => {

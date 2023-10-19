@@ -1,6 +1,7 @@
 import Button from '../../UI-elements/Button';
 import classes from './Recipe.module.css';
 
+// returns current recipe component that provides link to external site for cooking directions
 const Directions = (props) => {
   return (
     <div className={classes.directions}>

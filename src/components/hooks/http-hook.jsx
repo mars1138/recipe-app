@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 
+// Hook returns: sendRequest for API calls; isSubmitting & error states; function to clear errors
 export const useHttpRequest = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState();
@@ -15,6 +16,7 @@ export const useHttpRequest = () => {
   const sendRequest = useCallback(async function (url, uploadData = undefined) {
     setIsSubmitting(true);
     try {
+      // uploadData exists, send POST; else default to GET
       const fetchPro = uploadData
         ? fetch(url, {
             method: 'POST',
@@ -30,17 +32,20 @@ export const useHttpRequest = () => {
         fetchPro,
         timeout(+`${import.meta.env.VITE_TIMEOUT_SEC}`),
       ]);
-      // console.log('getJSON res:', res);
 
       const data = await res.json();
-      console.log('getJSON data:', data);
-
-      if (!res.ok) throw new Error(`${data.message} (${res.status}😫)`);
+      if (!res.ok)
+        throw new Error(
+          `${data.message ? data.message : ''}\nUnable to complete request:  ${
+            res.statusText ? res.statusText : 'Unknown error'
+          } (${res.status})`
+        );
+      if (data.data?.recipes?.length === 0)
+        throw new Error(`No results found for query`);
 
       setIsSubmitting(false);
       return data;
     } catch (err) {
-      console.log('sendrequest err:', err);
       setError(err);
       setIsSubmitting(false);
       throw err;
