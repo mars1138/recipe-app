@@ -11,13 +11,13 @@ const Bookmarks = (props) => {
   const content = [];
 
   siteCtx.bookmarks.forEach((item, i) => {
-    content.push(<Preview item={item} key={i} />);
+    content.push(<Preview item={item} key={i} recipeRequest={props.recipeRequest} />);
   });
 
   // add button to clear bookmarks list
   if (siteCtx.bookmarks.length > 0) {
     content.push(
-      <div className={classes.button}>
+      <div className={classes.button} key="button">
         <Button
           small
           onClick={() => {

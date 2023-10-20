@@ -18,8 +18,11 @@ const Details = (props) => {
     setIsSaved(saved < 0 ? false : true);
   });
 
-  const servingsHandler = (newServings) => {
-    siteCtx.updateServings(newServings);
+  const decreaseHandler = () => {
+    siteCtx.updateServings(props.servings - 1);
+  };
+  const increaseHandler = () => {
+    siteCtx.updateServings(props.servings + 1);
   };
   const bookmarkHandler = () => {
     siteCtx.toggleBookmark(props.recipeId);
@@ -42,22 +45,12 @@ const Details = (props) => {
         <span className={classes.text}>servings</span>
 
         <div className={classes.buttons}>
-          <Button
-            tiny
-            onClick={() => {
-              servingsHandler(props.servings - 1);
-            }}
-          >
+          <Button tiny onClick={decreaseHandler}>
             <svg>
               <use href="icons.svg#icon-minus-circle"></use>
             </svg>
           </Button>
-          <Button
-            tiny
-            onClick={() => {
-              servingsHandler(props.servings + 1);
-            }}
-          >
+          <Button tiny onClick={increaseHandler}>
             <svg>
               <use href="icons.svg#icon-plus-circle"></use>
             </svg>

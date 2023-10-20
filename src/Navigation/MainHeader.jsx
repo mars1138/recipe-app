@@ -8,7 +8,10 @@ const MainHeader = (props) => {
     <header className={classes.header}>
       <img src="logo.png" alt="Logo" className={classes.logo} />
       <Search searchRecipe={props.searchRecipe} />
-      <Navigation addRecipe={props.addRecipe} />
+      <Navigation
+        addRecipe={props.addRecipe}
+        recipeRequest={props.recipeRequest}
+      />
     </header>
   );
 };

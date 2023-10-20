@@ -37,7 +37,12 @@ const Navigation = (props) => {
       exit={{ opacity: 0 }}
     >
       <ul className={classes['bookmarks-list']}>
-        {siteCtx.bookmarks.length > 0 && <Bookmarks onClear={hoverHandler} />}
+        {siteCtx.bookmarks.length > 0 && (
+          <Bookmarks
+            onClear={hoverHandler}
+            recipeRequest={props.recipeRequest}
+          />
+        )}
         {!siteCtx.bookmarks.length > 0 && message}
       </ul>
     </motion.div>

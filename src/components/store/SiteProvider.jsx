@@ -12,7 +12,6 @@ const defaultSiteState = {
 
 const siteReducer = (state, action) => {
   if (action.type === 'QUERY') {
-
     const updatedResults = [...action.results];
 
     return {
@@ -85,13 +84,15 @@ const siteReducer = (state, action) => {
 
   if (action.type === 'SERVINGS') {
     const updatedRecipe = { ...state.currentRecipe };
-
+    const updatedIng = [...state.currentRecipe.ingredients];
     updatedRecipe.servings = action.servings;
 
-    updatedRecipe.ingredients.forEach((ing) => {
+    updatedIng.forEach((ing) => {
       ing.quantity =
         (ing.quantity * action.servings) / state.currentRecipe.servings;
     });
+
+    updatedRecipe.ingredients = [...updatedIng];
 
     return {
       currentRecipe: updatedRecipe,

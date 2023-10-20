@@ -74,7 +74,7 @@ function App() {
 
   return (
     <div className="container">
-      <MainHeader addRecipe={showAddHandler} searchRecipe={searchHandler} />
+      <MainHeader addRecipe={showAddHandler} searchRecipe={searchHandler} recipeRequest={recipeRequest}/>
       <main className="main">
         <MainBody />
         <AnimatePresence>

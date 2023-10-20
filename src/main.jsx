@@ -6,9 +6,9 @@ import SiteProvider from './components/store/SiteProvider';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <SiteProvider>
       <App />
     </SiteProvider>
-  </React.StrictMode>
+  // </React.StrictMode>
 );
